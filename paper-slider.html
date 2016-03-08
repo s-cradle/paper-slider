@@ -247,7 +247,7 @@ Custom property | Description | Default
       }
 
       .pin > #sliderKnob > #sliderKnobInner::after {
-        content: attr(value);
+        content: attr(pin-label);
         position: absolute;
         top: 0;
         left: 50%;
@@ -331,7 +331,7 @@ Custom property | Description | Default
         on-up="_resetKnob"
         on-track="_onTrack"
         on-transitionend="_knobTransitionEnd">
-          <div id="sliderKnobInner" value$="[[immediateValue]]"></div>
+          <div id="sliderKnobInner" value$="[[immediateValue]]" pin-label$="[[_computePinLabel(immediateValue)]]"></div>
       </div>
     </div>
 
@@ -728,6 +728,12 @@ Custom property | Description | Default
           }
           this._ripple.holdDown = receivedFocusFromKeyboard;
         }
+      },
+
+      // ピンのラベルを値から計算する関数
+      // 外からオーバーライドして使う。
+      _computePinLabel: function(value) {
+        return value;
       }
     });
 
